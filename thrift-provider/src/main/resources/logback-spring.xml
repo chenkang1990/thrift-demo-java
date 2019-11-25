@@ -1,0 +1,64 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date|%thread|%X{traceNo}|%level|%logger{0}.%M|%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 参考官网配置：https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/htmlsingle/#boot-features-custom-log-configuration -->
+    <springProperty scope="context" name="loggingRoot" source="loggingRoot" />
+    <springProperty scope="context" name="loggingLevel" source="loggingLevel" />
+    <springProperty scope="context" name="server.name" source="server.name" />
+
+    <!--&lt;!&ndash; 日志配置 &ndash;&gt;-->
+    <!--<appender name="rollinginfoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>${loggingRoot}/${server.name}/${server.name}.log</file>-->
+        <!--&lt;!&ndash; Size and time based rolling policy   https://logback.qos.ch/manual/appenders.html &ndash;&gt;-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+            <!--<fileNamePattern>${loggingRoot}/${server.name}/${server.name}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+            <!--<maxFileSize>500MB</maxFileSize>-->
+            <!--<maxHistory>30</maxHistory>-->
+        <!--</rollingPolicy>-->
+        <!--<encoder>-->
+            <!--<pattern>%date|%thread|%X{traceNo}|%level|%logger{0}.%M|%msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--&lt;!&ndash; 错误日志单独打印 &ndash;&gt;-->
+    <!--<appender name="errorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>${loggingRoot}/${server.name}/error.log</file>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+            <!--<fileNamePattern>${loggingRoot}/${server.name}/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+            <!--<maxFileSize>500MB</maxFileSize>-->
+            <!--<maxHistory>30</maxHistory>-->
+        <!--</rollingPolicy>-->
+        <!--<encoder>-->
+            <!--<pattern>%date|%thread|%X{traceNo}|%level|%logger{0}.%M|%msg%n</pattern>-->
+        <!--</encoder>-->
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+            <!--<level>ERROR</level>-->
+            <!--<onMatch>ACCEPT</onMatch>-->
+            <!--<onMismatch>DENY</onMismatch>-->
+        <!--</filter>-->
+    <!--</appender>-->
+
+    <!--&lt;!&ndash; 异步打印日志，提高性能 &ndash;&gt;-->
+    <!--<appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
+        <!--<discardingThreshold>0</discardingThreshold>-->
+        <!--<queueSize>512</queueSize>-->
+        <!--<appender-ref ref="rollinginfoFile"/>-->
+    <!--</appender>-->
+
+    <!--<appender name="ASYNC-ERROR" class="ch.qos.logback.classic.AsyncAppender">-->
+        <!--<discardingThreshold>0</discardingThreshold>-->
+        <!--<queueSize>512</queueSize>-->
+        <!--<appender-ref ref="errorFile"/>-->
+    <!--</appender>-->
+
+    <root level="${loggingLevel}">
+        <!--<appender-ref ref="ASYNC" />-->
+        <!--<appender-ref ref="ASYNC-ERROR" />-->
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
