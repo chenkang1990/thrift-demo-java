@@ -1,24 +1,24 @@
 package com.xiaomi.game.demo.thrift.client.controller;
 
-import com.xiaomi.game.demo.thrift.client.service.OrderServiceProxy;
+import com.xiaomi.game.demo.thrift.client.service.HelloWorldProxy;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/order")
+@RequestMapping("/foo")
 @RestController
-public class OrderController {
+public class FooController {
 
     @Autowired
-    private OrderServiceProxy orderServiceProxy;
+    private HelloWorldProxy helloWorldProxy;
 
-    @GetMapping("/new")
-    public String createOrder(@RequestParam("productId") String productId, @RequestParam("quanity") Integer quanity) {
+    @GetMapping("/bar/{who}")
+    public String createOrder(@PathVariable("who") String who) {
         try {
-            return orderServiceProxy.createOrder(productId, quanity);
+            return helloWorldProxy.hi(who);
         } catch (TException e) {
             e.printStackTrace();
         }

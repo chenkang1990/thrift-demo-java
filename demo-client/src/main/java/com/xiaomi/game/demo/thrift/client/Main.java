@@ -1,4 +1,4 @@
-package com.xiaomi.game.demo.thrift.provider;
+package com.xiaomi.game.demo.thrift.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

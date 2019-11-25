@@ -8,8 +8,4 @@ public class OrderServiceNewProxy {
     public String createOrder() {
         return "";
     }
-
-    public String createOrderXiaomi() {
-        return "";
-    }
 }

@@ -11,11 +11,11 @@
     </parent>
 
     <groupId>com.xiaomi.game.demo</groupId>
-    <artifactId>thrift-consumer</artifactId>
+    <artifactId>demo-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>thrift-consumer</name>
-    <description>Thrift Consumer</description>
+    <name>demo-server</name>
+    <description>Thrift Server</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,7 +24,22 @@
     </properties>
 
     <dependencies>
-        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xiaomi.game.demo</groupId>
+            <artifactId>demo-thrift</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
