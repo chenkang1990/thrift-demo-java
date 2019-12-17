@@ -1,12 +1,10 @@
 package com.xiaomi.game.demo.thrift.client.controller;
 
+import com.xiaomi.game.demo.thrift.People;
 import com.xiaomi.game.demo.thrift.client.service.HelloWorldProxy;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/foo")
 @RestController
@@ -15,10 +13,10 @@ public class FooController {
     @Autowired
     private HelloWorldProxy helloWorldProxy;
 
-    @GetMapping("/bar/{who}")
-    public String createOrder(@PathVariable("who") String who) {
+    @PostMapping(value = "/bar", produces = "application/json")
+    public String createOrder(@RequestBody People people) {
         try {
-            return helloWorldProxy.hi(who);
+            return helloWorldProxy.say(people);
         } catch (TException e) {
             e.printStackTrace();
         }
